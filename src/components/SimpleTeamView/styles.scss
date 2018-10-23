@@ -1,0 +1,130 @@
+@import '../../styles/config/variables';
+@import '../../styles/config/mixins';
+
+.header {
+  color: $gray;
+  text-transform: uppercase;
+  margin-bottom: $gutter-a;
+  h1 {
+    font-size: 14px;    
+  }
+}
+
+.list {
+  .item {
+    padding: $gutter-b;
+    position: relative;
+    height: 56px;
+    &.item-open {
+      padding: 0;
+    }
+    &:before,
+    &:after {
+      content: ' ';
+      display: table;
+      width: 100%;
+    }
+    .box-image {
+      float: left;
+      margin: 0 $gutter-b 0 0;
+      img {
+        border-radius: 50%;
+        height: 38px;
+        width: 38px;
+      }
+    }
+    .box-content {
+      h4 {
+        padding: 0 0 0 0;
+      }
+      h5 {
+        font-weight: 400;
+      }
+      .asterisk {
+        color: $orange;
+      }
+    }
+  }
+}
+
+.button-add {
+  cursor: pointer;
+  .box-content {
+    h4 {
+      color: $green;
+    }
+  }
+  
+  .add {
+    font-size: 24px;
+    background-color: $green-light;
+    border-radius: 50%;
+    color: $green;
+    display: inline-block;
+    height: 38px;
+    padding: 11px 0 0 0;
+    text-align: center;
+    width: 38px;
+  }
+}
+.box-autosuggest {
+  display: none;
+  
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.2);
+  padding: $gutter-a 0 0 0;
+  width: 100%;
+
+  // &.open {
+  //   padding-bottom: 0;
+  // }
+
+  .react-autosuggest__input {
+    border: none;
+    border-bottom: 1px solid $green;
+    font-size: 14px;
+    color: $green-dark;
+    height: 25px;
+    width: 94%;
+    margin-left: $gutter-b;
+    margin-right: $gutter-b;
+    margin-bottom: $gutter-a;
+  }
+  .react-autosuggest__input--open {
+    margin-bottom: $gutter-b;
+  }
+  .react-autosuggest__suggestions-container--open {
+    position: relative;
+    z-index: 1;
+    background: #FFF;
+    width: 100%;
+    left: 0;
+  }
+  .react-autosuggest__suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    .react-autosuggest__suggestion {
+      .item {
+        padding: $gutter-c $gutter-b;
+        .box-content {
+          padding: 8px 0 0 0;
+          h4 {
+            color: $green-dark;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 10px;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  color: rgba($orange, 0.5);
+}

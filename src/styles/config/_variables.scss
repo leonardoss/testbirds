@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+$green-dark:     #17332F;
+$green:          #007672;
+$green-light:    #E1F4EA;
+$gray:           #999999;
+$orange:         #FF8F00;
+
+$font-family:       'Roboto', monospace;
+$font-weight:       400;
+$font-size:         14px !default;
+$line-height:       140% !default;
+
+$body-bg:          #FFF !default;
+$text-color:       #000 !default;
+$link-color:                $text-color !default;
+$link-hover-color:          #CCC !default;
+$link-hover-decoration:     none !default;
+
+$screen-xs-min:     320px !default;
+$screen-sm-min:     768px !default;
+$screen-md-min:     1300px !default;
+$screen-lg-min:     1900px !default;
+
+$screen-xs-max:     ($screen-sm-min - 1) !default;
+$screen-sm-max:     ($screen-md-min - 1) !default;
+$screen-md-max:     ($screen-lg-min - 1) !default;
+
+$grid-columns:      12 !default;
+$grid-gutter:       30px !default;
+
+$container-sm:      (720px + $grid-gutter) !default;
+$container-md:      (940px + $grid-gutter) !default;
+$container-lg:      (1170px + $grid-gutter) !default;
+
+$gutter-a: 16px;
+$gutter-b: 10px;
+$gutter-c: 8px;
