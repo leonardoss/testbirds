@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import CustomAutosuggest from './CustomAutosuggest';
 
 import './styles.scss';
@@ -24,6 +24,7 @@ class SimpleTeamView extends React.Component {
   render() {
     return (
       <div>
+        <p>:{ this.props.newValue }:</p>
         <div className="header">
           <h1>Your team for this test</h1>
           <i className="icon-people"></i>
@@ -55,7 +56,7 @@ class SimpleTeamView extends React.Component {
               </div>
             </div>
 
-            <div className="item">
+            {/* <div className="item">
               <div className="box-image">
                 <img src={logo} alt="avatar default" />
               </div>
@@ -76,7 +77,7 @@ class SimpleTeamView extends React.Component {
                   Client Germany
                 </h4>
               </div>
-            </div>
+            </div> */}
             
           </div>
         </div>
@@ -84,4 +85,9 @@ class SimpleTeamView extends React.Component {
     );
   }
 }
-export default SimpleTeamView;
+
+const mapStateToProps = store => ({
+  newValue: store.MembersReducer.newValue
+});
+
+export default connect(mapStateToProps)(SimpleTeamView);

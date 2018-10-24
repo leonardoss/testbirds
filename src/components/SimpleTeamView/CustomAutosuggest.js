@@ -1,5 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
+
+import { addMember } from '../../actions';
 
 import Autosuggest from 'react-autosuggest';
 import MOCK_USERS from '../../static/json/data.json';
@@ -14,7 +18,7 @@ const getSuggestions = value => {
   );
 };
   
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => suggestion.username;
 
 const renderSuggestion = suggestion => (
   <div className="item" data-id={suggestion.id} data-role={suggestion.role}>
@@ -46,15 +50,22 @@ class CustomAutosuggest extends React.Component {
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
+    // console.log('onSuggestionsFetchRequested');
     this.setState({
       suggestions: getSuggestions(value)
     });
   };
 
   onSuggestionsClearRequested = () => {
+    // console.log('onSuggestionsClearRequested');
     this.setState({
       suggestions: []
     });
+  };
+  
+  onSuggestionSelected = (event, obj ) => {
+    console.log('onSuggestionSelected', obj);
+    addMember(obj);
   };
 
   render() {
@@ -66,6 +77,9 @@ class CustomAutosuggest extends React.Component {
       value,
       onChange: this.onChange
     };
+
+    // console.log('this.state.value', value);
+    // console.log('this.state.suggestions', suggestions);
     
     return (
       <div>
@@ -73,6 +87,7 @@ class CustomAutosuggest extends React.Component {
           suggestions={suggestions}
           onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
           onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          onSuggestionSelected={this.onSuggestionSelected}
           getSuggestionValue={getSuggestionValue}
           renderSuggestion={renderSuggestion}
           inputProps={inputProps}
@@ -89,4 +104,11 @@ CustomAutosuggest.propTypes = {
   openAutosuggest: PropTypes.bool,
 };
 
-export default CustomAutosuggest;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ addMember }, dispatch);
+
+const mapStateToProps = store => ({
+  
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomAutosuggest);
