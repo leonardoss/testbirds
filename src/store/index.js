@@ -9,6 +9,8 @@ const DEV_TOOLS = () => {
   return devTools;
 };
 
+console.log ('store REDUCERS', reducers);
+
 export const Store = createStore(
   reducers,
   compose (

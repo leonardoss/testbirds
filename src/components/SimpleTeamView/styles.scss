@@ -5,8 +5,45 @@
   color: $gray;
   text-transform: uppercase;
   margin-bottom: $gutter-a;
+  position: relative;
   h1 {
     font-size: 14px;    
+  }
+  .header-link {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    padding: 4px 10px 4px 10px;
+    span {
+      display: none;
+      font-size: 10px;
+      vertical-align: middle;
+      color: #5A6E6B;
+    }
+    .icon-people {
+      background-image: url(../../static/images/icon-team.png);
+      height: 11px;
+      width: 13px;
+      display: inline-block;
+      margin: 0 0px 0px 6px;
+    }
+  }
+  @media (min-width: $screen-sm-min) and (max-width: $screen-md-min) {
+    .header-link {
+      span {
+        display: inline-block;
+      }
+      &:hover {
+        background-color: $green-light;
+      }
+    }
+  }
+  @media (min-width: $screen-lg-min) {
+    .header-link {
+      &:hover {
+        background-color: $green-light;
+      }
+    }
   }
 }
 
@@ -44,17 +81,66 @@
         color: $orange;
       }
     }
+    &.item-member {
+      .box-remove {
+        display: none;
+        float: left;
+        margin: 0 $gutter-b 0 0;
+        
+      }
+      &:hover {
+        background-color: $green-light;
+        .box-image {
+          display: none;
+        }
+        .box-remove {
+          display: block;
+        }
+      }
+    }
+  }
+  
+}
+.btn-remove {
+  background-color: #FFF;
+  border: 1px solid transparent;
+  color: $orange;
+  border-radius: 50%;
+  height: 38px;
+  width: 38px;
+  text-indent: -9999px;
+  position: relative;
+  &:before {
+    content: '';
+    background-color: $orange;
+    position: absolute;
+    top: 11px;
+    left: 18px;
+    height: 14px;
+    width: 1px;
+    transform: rotate(45deg);
+  }
+  &:after {
+    content: '';
+    background-color: $orange;
+    position: absolute;
+    top: 11px;
+    right: 18px;
+    height: 14px;
+    width: 1px;
+    transform: rotate(-45deg);
+  }
+  &:hover {
+    border-color: $orange;
   }
 }
-
 .button-add {
   cursor: pointer;
   .box-content {
     h4 {
       color: $green;
     }
-  }
-  
+  } 
   .add {
     font-size: 24px;
     background-color: $green-light;
@@ -69,14 +155,9 @@
 }
 .box-autosuggest {
   display: none;
-  
   box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.2);
   padding: $gutter-a 0 0 0;
   width: 100%;
-
-  // &.open {
-  //   padding-bottom: 0;
-  // }
 
   .react-autosuggest__input {
     border: none;
@@ -106,11 +187,26 @@
     .react-autosuggest__suggestion {
       .item {
         padding: $gutter-c $gutter-b;
+        cursor: pointer;
         .box-content {
           padding: 8px 0 0 0;
           h4 {
             color: $green-dark;
             font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+  @media (min-width: $screen-sm-min + 1) {
+    .react-autosuggest__suggestions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      .react-autosuggest__suggestion {
+        .item {
+          &:hover {
+            background-color: $green-light;
           }
         }
       }

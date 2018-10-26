@@ -1,19 +1,28 @@
-import { ADD_MEMBER, REMOVE_MEMBER } from '../actions/actionTypes';
+import { 
+  ADD_MEMBER, 
+  REMOVE_MEMBER 
+} from '../actions/actionTypes';
 
 const initialState = {
-  newValue: 'TEST'
+  members: []
 }
 
 export default function MembersReducer(state = initialState, action) {
+  console.log('reducer MembersReducer', state, action);
   switch (action.type) {
     case ADD_MEMBER:
       return {
         ...state,
-        newValue: action.newValue
+        members: [...state.members, action.member]
       };
     case REMOVE_MEMBER:
       return {
-        ...state
+        ...state,
+        members: state.members.filter( 
+          (member) => {
+            return member.id !== action.member
+          }
+        )
       };
     default:
       return state;

@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
-import { addMember } from '../../actions';
+import * as actions from '../../../actions';
 
 import Autosuggest from 'react-autosuggest';
-import MOCK_USERS from '../../static/json/data.json';
-import MOCK_IMAGE from "../../static/images/avatar-default.png";
+import MOCK_USERS from '../../../static/json/data.json';
   
 const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
@@ -18,12 +17,12 @@ const getSuggestions = value => {
   );
 };
   
-const getSuggestionValue = suggestion => suggestion.username;
+const getSuggestionValue = suggestion => '';
 
 const renderSuggestion = suggestion => (
   <div className="item" data-id={suggestion.id} data-role={suggestion.role}>
     <div className="box-image">
-      <img src={MOCK_IMAGE} alt={suggestion.username} />
+      <img src={require('../../../static/images/' + suggestion.picture)} alt={suggestion.username} />
     </div>
     <div className="box-content">
       <h4>
@@ -50,14 +49,12 @@ class CustomAutosuggest extends React.Component {
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
-    // console.log('onSuggestionsFetchRequested');
     this.setState({
       suggestions: getSuggestions(value)
     });
   };
 
   onSuggestionsClearRequested = () => {
-    // console.log('onSuggestionsClearRequested');
     this.setState({
       suggestions: []
     });
@@ -65,7 +62,8 @@ class CustomAutosuggest extends React.Component {
   
   onSuggestionSelected = (event, obj ) => {
     console.log('onSuggestionSelected', obj);
-    addMember(obj);
+    this.props.addMember(obj.suggestion);
+    this.props.toogleAutosuggest();
   };
 
   render() {
@@ -78,9 +76,6 @@ class CustomAutosuggest extends React.Component {
       onChange: this.onChange
     };
 
-    // console.log('this.state.value', value);
-    // console.log('this.state.suggestions', suggestions);
-    
     return (
       <div>
         <Autosuggest 
@@ -90,6 +85,7 @@ class CustomAutosuggest extends React.Component {
           onSuggestionSelected={this.onSuggestionSelected}
           getSuggestionValue={getSuggestionValue}
           renderSuggestion={renderSuggestion}
+          focusInputOnSuggestionClick={false} 
           inputProps={inputProps}
         />
         <span 
@@ -102,13 +98,11 @@ class CustomAutosuggest extends React.Component {
 
 CustomAutosuggest.propTypes = {
   openAutosuggest: PropTypes.bool,
+  addMember: PropTypes.func
 };
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ addMember }, dispatch);
-
-const mapStateToProps = store => ({
-  
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CustomAutosuggest);
+export default compose(connect(store => ({
+  members: store.MembersReducer.members
+}), {
+  ...actions
+}))(CustomAutosuggest);

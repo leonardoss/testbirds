@@ -1,3 +1,2 @@
-export const CLICK_UPDATE_VALUE = 'CLICK_UPDATE_VALUE';
 export const ADD_MEMBER = 'ADD_MEMBER';
 export const REMOVE_MEMBER = 'REMOVE_MEMBER';

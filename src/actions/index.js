@@ -1,15 +1,17 @@
-import { CLICK_UPDATE_VALUE, ADD_MEMBER, REMOVE_MEMBER } from './actionTypes';
+import { ADD_MEMBER, REMOVE_MEMBER } from './actionTypes';
 
-export function clickButton(value) {
+export function addMember(value) {
+  console.log('action addMember', value);
   return {
-    type: CLICK_UPDATE_VALUE,
-    newValue: value
+    type: ADD_MEMBER,
+    member: value
   };
 }
 
-export function addMember(value) {
+export function removeMember(value) {
+  console.log('action removeMember', value);
   return {
-    type: ADD_MEMBER,
-    newMember: value
+    type: REMOVE_MEMBER,
+    member: value
   };
 }
