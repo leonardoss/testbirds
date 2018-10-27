@@ -8,15 +8,11 @@ import * as actions from '../../../actions';
 class MembersItem extends React.Component {
 
   handleRemove = (id) => {
-    console.log('handleRemove', id);
     this.props.removeMember(id);
   }
 
   render() {
-
-    const { item } = this.props
-
-    console.log('teste MembersItem', this.props);
+    const { item } = this.props;
     
     return (
       <div className="item item-member">
@@ -36,7 +32,8 @@ class MembersItem extends React.Component {
 }
 
 MembersItem.propTypes = {
-  item: PropTypes.object
+  item: PropTypes.object,
+  removeMember: PropTypes.func,
 };
 
 export default compose(connect(store => ({

@@ -14,6 +14,7 @@ class SimpleTeamView extends React.Component {
 
     this.state = {
       openAutosuggest: false,
+      showAll: false,
     }
   }
 
@@ -21,10 +22,16 @@ class SimpleTeamView extends React.Component {
     this.setState(prevState => ({
       openAutosuggest: !prevState.openAutosuggest
     }));
-    console.log('toogleAutosuggest', this.state.openAutosuggest);
   };
 
+  toogleShowAll = () => {
+    this.setState(prevState => ({
+      showAll: !prevState.showAll
+    }));
+  }
+
   render() {
+    const LIMIT_MEMBERS = 2;
     
     return (
       <div>
@@ -35,7 +42,7 @@ class SimpleTeamView extends React.Component {
             <i className="icon-people"></i>
           </a>
         </div>
-        <div className="body">
+        <div className={'body ' + ((this.props.members.length > LIMIT_MEMBERS && !this.state.showAll) ? 'body-showall' : '')}>
           <div className="list">
             <div className={'item ' + (this.state.openAutosuggest === true ? 'item-open' : '')}>
               <div 
@@ -54,8 +61,14 @@ class SimpleTeamView extends React.Component {
                 />
               </div>
             </div>
-            <MembersList />
+            <MembersList 
+              limitMembers={LIMIT_MEMBERS}
+              showAll={this.state.showAll}
+              toogleShowAll={this.toogleShowAll} />
           </div>
+          {(this.props.members.length > LIMIT_MEMBERS && !this.state.showAll) &&
+            <button className="btn-showall" onClick={this.toogleShowAll}>Show All <i className="icon-arrow-down"></i></button>
+          }
         </div>
       </div>
     );

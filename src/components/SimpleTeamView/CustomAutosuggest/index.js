@@ -12,6 +12,11 @@ const getSuggestions = value => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
+  console.log('getSuggestions inputValue', inputValue);
+  console.log('getSuggestions inputLength', inputLength);
+
+  // return ['not found'];
+
   return inputLength === 0 ? [] : MOCK_USERS.filter(lang =>
     lang.username.toLowerCase().slice(0, inputLength) === inputValue
   );
@@ -61,7 +66,6 @@ class CustomAutosuggest extends React.Component {
   };
   
   onSuggestionSelected = (event, obj ) => {
-    console.log('onSuggestionSelected', obj);
     this.props.addMember(obj.suggestion);
     this.props.toogleAutosuggest();
   };

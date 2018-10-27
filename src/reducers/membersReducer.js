@@ -8,7 +8,6 @@ const initialState = {
 }
 
 export default function MembersReducer(state = initialState, action) {
-  console.log('reducer MembersReducer', state, action);
   switch (action.type) {
     case ADD_MEMBER:
       return {

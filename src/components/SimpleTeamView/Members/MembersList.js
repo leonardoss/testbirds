@@ -8,49 +8,35 @@ import MembersItem from './MembersItem';
 import * as actions from '../../../actions';
 
 class MembersList extends React.Component {
-  
-  constructor() {
-    super();
-
-    this.state = {
-      showAll: false
-    }
-  }
-
-  listMembers = () => {
-    console.log('this.props.members', this.props.members);
-
-    // members.slice(0, 4);
-  }
-  
-  handleShowAll = () => {
-    this.setState({
-      showAll: true
-    });
-  }
 
   render() {
-    const { members } = this.props
-    const LIMIT_MEMBERS = 5;
-
-    console.log('teste members', members);
-    console.log('this.props.members', this.props.members);
+    const { members } = this.props;
     
     return (
-      <div>
-        {members.slice(0, LIMIT_MEMBERS).map((item, index) => 
-          <MembersItem item={item} key={`item_${index + 1}`} />
-        )}
-        {members.length > LIMIT_MEMBERS &&
-          <button className="btn-showall" onClick={this.handleShowAll}>Show All <i className="icon-arrow-down"></i></button>
-        }
-      </div>
+      !this.props.showAll ? 
+        (
+          members.slice(0, this.props.limitMembers).map((item, index) => 
+            <MembersItem 
+              item={item} 
+              key={`item_${index + 1}`}
+            />
+          )
+        ) : (
+          members.map((item, index) => 
+            <MembersItem 
+              item={item} 
+              key={`item_${index + 1}`}
+            />
+          )
+        )
     );
   }
 }
 
 MembersList.propTypes = {
-  members: PropTypes.array
+  members: PropTypes.array,
+  limitMembers: PropTypes.number,
+  toogleShowAll: PropTypes.func,
 };
 
 export default compose(connect(store => ({
