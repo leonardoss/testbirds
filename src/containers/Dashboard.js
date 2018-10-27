@@ -18,7 +18,7 @@ class Dashboard extends React.Component {
     return (
       <Layout>
         <section className="section-main">
-          <div className="container">
+          <div className="container-fluid">
             <div className="row">
               <div className="col-xs-12">
                 <SimpleTeamView />

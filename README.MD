@@ -24,3 +24,6 @@ $ npm test
 
 - Droid sans is a paid font. I used Roboto from GoogleFonts.
  - solve image problem - MOCK_IMAGE
+- using redux
+- using ReactTooltip 
+

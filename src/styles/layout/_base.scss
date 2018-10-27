@@ -1,18 +1,9 @@
 body {
   background-color: $body-bg;
 }
-
 .hidden {
   display: none;
 }
 .open {
   display: block;
-}
-
-.section-main {
-  padding-top: 15px;
-  padding-bottom: 15px;
-
-  border: 1px solid $gray;
-  border-top: 3px solid $green;
 }

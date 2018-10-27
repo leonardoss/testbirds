@@ -34,7 +34,7 @@ class SimpleTeamView extends React.Component {
     const LIMIT_MEMBERS = 2;
     
     return (
-      <div>
+      <div className="app-container">
         <div className="header">
           <h1>Your team for this test</h1>
           <a href="#" className="header-link">

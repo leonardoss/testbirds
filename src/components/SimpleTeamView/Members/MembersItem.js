@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
+import ReactTooltip from 'react-tooltip'
+
 import * as actions from '../../../actions';
 
 class MembersItem extends React.Component {
@@ -20,7 +22,8 @@ class MembersItem extends React.Component {
           <img src={require('../../../static/images/' + item.picture)} alt={item.username} />
         </div>
         <div className="box-remove">
-          <button className="btn-remove" onClick={() => this.handleRemove(item.id)}>X</button>
+          <button className="btn-remove" onClick={() => this.handleRemove(item.id)} data-tip="Remove user">X</button>
+          <ReactTooltip place="top" type="light" effect="solid" className="tooltip" />
         </div>
         <div className="box-content">
           <h5>{item.role} {item.role !== 'Admin' ? 'member' : ''}{item.role == 'External' ? <span className="asterisk">*</span> : ''}</h5>
