@@ -31,7 +31,8 @@ class SimpleTeamView extends React.Component {
   }
 
   render() {
-    const LIMIT_MEMBERS = 2;
+    const { members } = this.props
+    const LIMIT_MEMBERS = 5;
     
     return (
       <div className="app-container">
@@ -42,7 +43,7 @@ class SimpleTeamView extends React.Component {
             <i className="icon-people"></i>
           </a>
         </div>
-        <div className={'body ' + ((this.props.members.length > LIMIT_MEMBERS && !this.state.showAll) ? 'body-showall' : '')}>
+        <div className={'body ' + ((members.length > LIMIT_MEMBERS && !this.state.showAll) ? 'body-showall' : '')}>
           <div className="list">
             <div className={'item ' + (this.state.openAutosuggest === true ? 'item-open' : '')}>
               <div 
@@ -66,7 +67,7 @@ class SimpleTeamView extends React.Component {
               showAll={this.state.showAll}
               toogleShowAll={this.toogleShowAll} />
           </div>
-          {(this.props.members.length > LIMIT_MEMBERS && !this.state.showAll) &&
+          {(members.length > LIMIT_MEMBERS && !this.state.showAll) &&
             <button className="btn-showall" onClick={this.toogleShowAll}>Show All <i className="icon-arrow-down"></i></button>
           }
         </div>

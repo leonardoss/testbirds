@@ -15,8 +15,6 @@ const getSuggestions = value => {
   console.log('getSuggestions inputValue', inputValue);
   console.log('getSuggestions inputLength', inputLength);
 
-  // return ['not found'];
-
   return inputLength === 0 ? [] : MOCK_USERS.filter(lang =>
     lang.username.toLowerCase().slice(0, inputLength) === inputValue
   );

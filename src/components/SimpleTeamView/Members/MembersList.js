@@ -9,12 +9,12 @@ import * as actions from '../../../actions';
 
 class MembersList extends React.Component {
   render() {
-    const { members } = this.props;
+    const { members, limitMembers } = this.props;
 
     return (
       !this.props.showAll
         ? (
-          members.slice(0, this.props.limitMembers).map((item, index) => (
+          members.slice(0, limitMembers).map((item, index) => (
             <MembersItem
               item={ item }
               key={ `item_${index + 1}` }
