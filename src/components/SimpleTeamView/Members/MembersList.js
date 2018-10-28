@@ -8,26 +8,25 @@ import MembersItem from './MembersItem';
 import * as actions from '../../../actions';
 
 class MembersList extends React.Component {
-
   render() {
     const { members } = this.props;
-    
+
     return (
-      !this.props.showAll ? 
-        (
-          members.slice(0, this.props.limitMembers).map((item, index) => 
-            <MembersItem 
-              item={item} 
-              key={`item_${index + 1}`}
+      !this.props.showAll
+        ? (
+          members.slice(0, this.props.limitMembers).map((item, index) => (
+            <MembersItem
+              item={ item }
+              key={ `item_${index + 1}` }
             />
-          )
+          ))
         ) : (
-          members.map((item, index) => 
-            <MembersItem 
-              item={item} 
-              key={`item_${index + 1}`}
+          members.map((item, index) => (
+            <MembersItem
+              item={ item }
+              key={ `item_${index + 1}` }
             />
-          )
+          ))
         )
     );
   }
@@ -40,9 +39,7 @@ MembersList.propTypes = {
 };
 
 export default compose(connect(store => ({
-  members: store.MembersReducer.members
+  members: store.MembersReducer.members,
 }), {
-  ...actions
+  ...actions,
 }))(MembersList);
-
-

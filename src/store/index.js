@@ -11,7 +11,7 @@ const DEV_TOOLS = () => {
 
 export const Store = createStore(
   reducers,
-  compose (
+  compose(
     DEV_TOOLS(),
-  )
+  ),
 );
