@@ -9,10 +9,10 @@ import * as actions from '../../../actions';
 
 class MembersList extends React.Component {
   render() {
-    const { members, limitMembers } = this.props;
+    const { members, limitMembers, showAll } = this.props;
 
     return (
-      !this.props.showAll
+      !showAll
         ? (
           members.slice(0, limitMembers).map((item, index) => (
             <MembersItem
@@ -32,10 +32,16 @@ class MembersList extends React.Component {
   }
 }
 
+MembersList.defaultProps = {
+  members: [],
+  limitMembers: 5,
+  showAll: false,
+};
+
 MembersList.propTypes = {
-  members: PropTypes.array,
+  members: PropTypes.instanceOf(Array),
   limitMembers: PropTypes.number,
-  toogleShowAll: PropTypes.func,
+  showAll: PropTypes.bool,
 };
 
 export default compose(connect(store => ({

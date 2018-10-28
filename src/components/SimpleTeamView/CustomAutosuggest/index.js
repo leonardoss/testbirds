@@ -3,29 +3,33 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 
+import Autosuggest from 'react-autosuggest';
 import * as actions from '../../../actions';
 
-import Autosuggest from 'react-autosuggest';
 import MOCK_USERS from '../../../static/json/data.json';
-  
-const getSuggestions = value => {
+
+function escapeRegexCharacters(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+const getSuggestions = (value) => {
+  const escapedValue = escapeRegexCharacters(value.trim());
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
-  console.log('getSuggestions inputValue', inputValue);
-  console.log('getSuggestions inputLength', inputLength);
+  if (escapedValue === '') {
+    return [];
+  }
 
-  return inputLength === 0 ? [] : MOCK_USERS.filter(lang =>
-    lang.username.toLowerCase().slice(0, inputLength) === inputValue
-  );
+  return inputLength === 0 ? [] : MOCK_USERS.filter(lang => lang.username.toLowerCase().slice(0, inputLength) === inputValue);
 };
-  
+
 const getSuggestionValue = suggestion => '';
 
 const renderSuggestion = suggestion => (
-  <div className="item" data-id={suggestion.id} data-role={suggestion.role}>
+  <div className="item" data-id={ suggestion.id } data-role={ suggestion.role }>
     <div className="box-image">
-      <img src={require('../../../static/images/' + suggestion.picture)} alt={suggestion.username} />
+      <img src={ require(`../../../static/images/${suggestion.picture}`) } alt={ suggestion.username } />
     </div>
     <div className="box-content">
       <h4>
@@ -41,58 +45,78 @@ class CustomAutosuggest extends React.Component {
 
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      noSuggestions: false,
     };
   }
 
   onChange = (event, { newValue }) => {
     this.setState({
-      value: newValue
+      value: newValue,
     });
   };
 
   onSuggestionsFetchRequested = ({ value }) => {
+    const suggestions = getSuggestions(value);
+    const isInputBlank = value.trim() === '';
+    const noSuggestions = !isInputBlank && suggestions.length === 0;
+
     this.setState({
-      suggestions: getSuggestions(value)
+      suggestions,
+      noSuggestions,
     });
   };
 
   onSuggestionsClearRequested = () => {
     this.setState({
-      suggestions: []
+      suggestions: [],
     });
   };
-  
-  onSuggestionSelected = (event, obj ) => {
+
+  onSuggestionSelected = (event, obj) => {
     this.props.addMember(obj.suggestion);
     this.props.toogleAutosuggest();
   };
 
   render() {
-    
-    const { value, suggestions } = this.state;
+    const { value, suggestions, noSuggestions } = this.state;
 
     const inputProps = {
       placeholder: 'Type',
       value,
-      onChange: this.onChange
+      onChange: this.onChange,
     };
 
     return (
       <div>
-        <Autosuggest 
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          onSuggestionSelected={this.onSuggestionSelected}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          focusInputOnSuggestionClick={false} 
-          inputProps={inputProps}
+        <Autosuggest
+          suggestions={ suggestions }
+          onSuggestionsFetchRequested={ this.onSuggestionsFetchRequested }
+          onSuggestionsClearRequested={ this.onSuggestionsClearRequested }
+          onSuggestionSelected={ this.onSuggestionSelected }
+          getSuggestionValue={ getSuggestionValue }
+          renderSuggestion={ renderSuggestion }
+          focusInputOnSuggestionClick={ false }
+          inputProps={ inputProps }
         />
-        <span 
-          onClick={this.props.toogleAutosuggest}
-          className="close">x</span>
+        {
+          noSuggestions
+            && (
+            <div className="no-suggestions">
+              <h4>Team member not found.</h4>
+              <span>
+Maybe she/he is not in your
+                <a href="#">team?</a>
+              </span>
+            </div>
+            )
+        }
+        <span
+          onClick={ this.props.toogleAutosuggest }
+          className="close"
+        >
+x
+        </span>
       </div>
     );
   }
@@ -100,11 +124,11 @@ class CustomAutosuggest extends React.Component {
 
 CustomAutosuggest.propTypes = {
   openAutosuggest: PropTypes.bool,
-  addMember: PropTypes.func
+  addMember: PropTypes.func,
 };
 
 export default compose(connect(store => ({
-  members: store.MembersReducer.members
+  members: store.MembersReducer.members,
 }), {
-  ...actions
+  ...actions,
 }))(CustomAutosuggest);

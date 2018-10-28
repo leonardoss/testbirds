@@ -215,11 +215,12 @@
     margin-bottom: $gutter-b;
   }
   .react-autosuggest__suggestions-container--open {
-    position: relative;
+    position: absolute;
     z-index: 1;
     background: #FFF;
     width: 100%;
     left: 0;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
   }
   .react-autosuggest__suggestions-list {
     list-style: none;
@@ -282,5 +283,20 @@
   display: none;
   @media (min-width: $screen-sm-min) and (max-width: $screen-md-min), (min-width: $screen-lg-min) {
     display: block;
+  }
+}
+
+.no-suggestions {
+  text-align: center;
+  padding: 8px 0 16px 0;
+  line-height: 1;
+  h4 {
+    color: $green;
+  }
+  span {
+    font-size: 10px;
+    a {
+      border-bottom: 1px solid red;
+    }
   }
 }
