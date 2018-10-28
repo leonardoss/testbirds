@@ -1,0 +1,9 @@
+version: '3'
+services:
+
+  testbirds:
+    container_name: testbirds
+    image: testbirds
+    build: .
+    ports:
+      - "8001:8000"
