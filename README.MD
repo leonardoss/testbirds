@@ -1,6 +1,6 @@
-# TestBirds - Frontend Development Challenge
+# Testbirds - Frontend Development Challenge
 
-Application created to Frontend Development Challenge of TestBirds. Created based on React-Boilerplate (https://github.com/leonardoss/react-boilerplate)
+Application created to Frontend Development Challenge of Testbirds. Created based on my own React-Boilerplate (https://github.com/leonardoss/react-boilerplate)
 
 ##### Application created based on
     - React 16 
@@ -29,18 +29,6 @@ The application will be avaible on
 ```
 http://localhost:8000
 ```
-
-##### Run on docker
-With Docker installed
-```
-$ docker-compose up --build
-```
-
-The application will be avaible on
-```
-http://localhost:8001
-```
-Friendly to cloud :)
 
 ###  TODO
     - Running unit tests and Screenshoots test based on Jest/Enzyme
