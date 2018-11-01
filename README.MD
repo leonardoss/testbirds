@@ -9,7 +9,6 @@ Application created to Frontend Development Challenge of Testbirds. Created base
     - Redux
     - SASS
     - ESLint
-    - Docker
     - ReactTooltip
     - ReactAutosuggest
 
